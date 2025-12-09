@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>{{ 'Edit' if patient else 'Create' }} Patient</h2>
+{% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+<form method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  {% if not patient %}
+  <div class="mb-2"><label class="form-label">Patient ID</label><input class="form-control" name="patient_id"></div>
+  {% endif %}
+  <div class="mb-2"><label class="form-label">Gender</label><input class="form-control" name="gender" value="{{ patient.gender if patient else '' }}"></div>
+  <div class="mb-2"><label class="form-label">Age</label><input class="form-control" name="age" value="{{ patient.age if patient else '' }}"></div>
+  <div class="mb-2"><label class="form-label">Hypertension (0/1)</label><input class="form-control" name="hypertension" value="{{ patient.hypertension if patient else '' }}"></div>
+  <div class="mb-2"><label class="form-label">Ever Married</label><input class="form-control" name="ever_married" value="{{ patient.ever_married if patient else '' }}"></div>
+  <div class="mb-2"><label class="form-label">Work Type</label><input class="form-control" name="work_type" value="{{ patient.work_type if patient else '' }}"></div>
+  <div class="mb-2"><label class="form-label">Residence Type</label><input class="form-control" name="residence_type" value="{{ patient.residence_type if patient else '' }}"></div>
+  <div class="mb-2"><label class="form-label">Avg Glucose Level</label><input class="form-control" name="avg_glucose_level" value="{{ patient.avg_glucose_level if patient else '' }}"></div>
+  <div class="mb-2"><label class="form-label">BMI</label><input class="form-control" name="bmi" value="{{ patient.bmi if patient else '' }}"></div>
+  <div class="mb-2"><label class="form-label">Smoking Status</label><input class="form-control" name="smoking_status" value="{{ patient.smoking_status if patient else '' }}"></div>
+  <div class="mb-2"><label class="form-label">Stroke (0/1)</label><input class="form-control" name="stroke" value="{{ patient.stroke if patient else '' }}"></div>
+  <button class="btn btn-primary" type="submit">Save</button>
+</form>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Patient {{ patient.id }}</h2>
+<dl class="row">
+  <dt class="col-sm-3">Patient ID</dt><dd class="col-sm-9">{{ patient.patient_id }}</dd>
+  <dt class="col-sm-3">Gender</dt><dd class="col-sm-9">{{ patient.gender }}</dd>
+  <dt class="col-sm-3">Age</dt><dd class="col-sm-9">{{ patient.age }}</dd>
+  <dt class="col-sm-3">Hypertension</dt><dd class="col-sm-9">{{ patient.hypertension }}</dd>
+  <dt class="col-sm-3">Married</dt><dd class="col-sm-9">{{ patient.ever_married }}</dd>
+  <dt class="col-sm-3">Work Type</dt><dd class="col-sm-9">{{ patient.work_type }}</dd>
+  <dt class="col-sm-3">Residence</dt><dd class="col-sm-9">{{ patient.residence_type }}</dd>
+  <dt class="col-sm-3">Avg Glucose</dt><dd class="col-sm-9">{{ patient.avg_glucose_level }}</dd>
+  <dt class="col-sm-3">BMI</dt><dd class="col-sm-9">{{ patient.bmi }}</dd>
+  <dt class="col-sm-3">Smoking</dt><dd class="col-sm-9">{{ patient.smoking_status }}</dd>
+  <dt class="col-sm-3">Stroke</dt><dd class="col-sm-9">{{ patient.stroke }}</dd>
+</dl>
+<form method="post" action="{{ url_for('patients.predict_patient', id=patient.id) }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <button class="btn btn-warning" type="submit">Predict risk</button>
+</form>
+{% if risk is not none %}
+  <div class="alert alert-info mt-3">Risk score: {{ risk }}</div>
+{% endif %}
+{% endblock %}

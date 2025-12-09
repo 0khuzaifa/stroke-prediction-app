@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Patients</h2>
+  <a class="btn btn-success" href="{{ url_for('patients.create_patient') }}">Create</a>
+  </div>
+<table class="table table-striped">
+  <thead><tr>
+    <th>ID</th><th>PID</th><th>Gender</th><th>Age</th><th>Stroke</th><th>Actions</th>
+  </tr></thead>
+  <tbody>
+  {% for p in patients %}
+    <tr>
+      <td>{{ p.id }}</td>
+      <td>{{ p.patient_id }}</td>
+      <td>{{ p.gender }}</td>
+      <td>{{ p.age }}</td>
+      <td>{{ p.stroke }}</td>
+      <td>
+        <a class="btn btn-sm btn-primary" href="{{ url_for('patients.view_patient', id=p.id) }}">View</a>
+        <a class="btn btn-sm btn-secondary" href="{{ url_for('patients.edit_patient', id=p.id) }}">Edit</a>
+        <form method="post" action="{{ url_for('patients.delete_patient', id=p.id) }}" style="display:inline">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

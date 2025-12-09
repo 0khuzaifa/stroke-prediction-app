@@ -1,0 +1,8 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="p-4 bg-light border rounded">
+  <h1>Welcome</h1>
+  <p>Manage stroke prediction patients.</p>
+  <a class="btn btn-primary" href="{{ url_for('patients.list_patients') }}">Patients</a>
+</div>
+{% endblock %}
